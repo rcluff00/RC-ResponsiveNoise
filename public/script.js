@@ -15,7 +15,7 @@ voice2Text.onend = function () {
 }
 
 $('#vtt').on('click', function () {
-  if ($(this).hasClass('recording')) {
+  if (voice2Text.speaking) {
     voice2Text.stop()
   } else {
     voice2Text.start()
