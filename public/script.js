@@ -1,5 +1,17 @@
-const text2Speech = window.speechSynthesis()
-text2Speech.speak('boobies')
+const synth = window.speechSynthesis
+
+$('h3').on('click', function () {
+  let speechStr = ''
+  $('#logsUl li').each(function ($this) {
+    speechStr += 'Time: '
+    speechStr += $this.children('small').text() + '\n'
+
+    let logBody = $this.children('pre')
+    speechStr += 'Log: '
+  })
+  const utterThis = new SpeechSynthesisUtterance(speechStr)
+  synth.speak(utterThis)
+})
 
 let $uvuIdInputDiv = $('.uvu-id')
 let $uvuIdInput = $('#uvuId')

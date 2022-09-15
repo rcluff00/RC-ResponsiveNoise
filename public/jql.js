@@ -116,8 +116,8 @@ class ElementCollection extends Array {
 
   each(fn) {
     this.forEach((elem) => {
-      let $elems = new ElementCollection(elem)
-      fn($elems)
+      let $elem = new ElementCollection(elem)
+      fn($elem)
     })
   }
 }
