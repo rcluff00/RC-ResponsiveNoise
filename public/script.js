@@ -6,7 +6,7 @@ voice2Text.onstart = function () {
 }
 
 voice2Text.onresult = (event) => {
-  alert(event.results[0][0].transcript)
+  $('#logBodyInput').val(`${event.results[0][0].transcript}\n`)
 }
 
 voice2Text.onend = function () {
@@ -23,23 +23,42 @@ $('#vtt').on('click', function () {
   $('#vtt').toggleClass('recording')
 })
 
-$('h3').on('click', function () {
-  text2Speech.cancel()
+$('#tts').on('click', function () {
+  if (text2Speech.speaking) {
+    text2Speech.cancel()
+    $('#tts')
+      .children('img')
+      .attr('src', 'https://ryancluff.com/cs4690/img/speaker-icon.png')
+    return
+  }
+  $('#tts')
+    .children('img')
+    .attr('src', 'https://ryancluff.com/cs4690/img/stop-icon.png')
   let speechStr = ''
-  $('#logsUl li').each(function ($this) {
-    speechStr += 'Time: '
-    speechStr += $this.children('small').text() + '\n'
 
-    let logBody = $this.children('pre').text()
-    if (logBody === '') {
-      speechStr += '(Log empty) \n'
-    } else {
-      speechStr += 'Log: '
-      speechStr += logBody + '\n'
-    }
-  })
+  if ($('#logsUl li').length == 0) {
+    speechStr = '(No logs recorded)'
+  } else {
+    $('#logsUl li').each(function ($this) {
+      speechStr += 'Time: '
+      speechStr += $this.children('small').text() + '\n'
+
+      let logBody = $this.children('pre').text()
+      if (logBody === '') {
+        speechStr += '(Log empty) \n'
+      } else {
+        speechStr += 'Log: '
+        speechStr += logBody + '\n'
+      }
+    })
+  }
   const utterThis = new SpeechSynthesisUtterance(speechStr)
   text2Speech.speak(utterThis)
+  utterThis.addEventListener('end', function () {
+    $('#tts')
+      .children('img')
+      .attr('src', 'https://ryancluff.com/cs4690/img/speaker-icon.png')
+  })
 })
 
 let $uvuIdInputDiv = $('.uvu-id')
@@ -189,6 +208,9 @@ function showLogs(json) {
 
   $('button').attr('disabled', 'false')
   $('#btnMask').css('display', 'none')
+
+  $('#tts').removeClass('hidden')
+  $('#vtt').removeClass('hidden')
 }
 
 // create new log
