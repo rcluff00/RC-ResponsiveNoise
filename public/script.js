@@ -6,8 +6,13 @@ $('h3').on('click', function () {
     speechStr += 'Time: '
     speechStr += $this.children('small').text() + '\n'
 
-    let logBody = $this.children('pre')
-    speechStr += 'Log: '
+    let logBody = $this.children('pre').text()
+    if (logBody === '') {
+      speechStr += '<Log empty> \n'
+    } else {
+      speechStr += 'Log: '
+      speechStr += logBody + '\n'
+    }
   })
   const utterThis = new SpeechSynthesisUtterance(speechStr)
   synth.speak(utterThis)
