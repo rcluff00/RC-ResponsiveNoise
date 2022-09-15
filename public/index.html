@@ -109,30 +109,52 @@
           data-cy="log_textarea"
         ></textarea>
 
-        <button
-          class="
-            bg-gradient-to-br
-            from-teal-500
-            to-sky-500
-            py-2
-            px-4
-            rounded-full
-            text-white
-            hover:from-teal-600 hover:to-sky-600
-            disabled:from-slate-200
-            disabled:to-slate-200
-            disabled:text-slate-400
-            transition
-          "
-          id="submit"
-          type="submit"
-          data-cy="add_log_btn"
-          disabled
-        >
-          Add Log
-        </button>
+        <div class="inline-block relative">
+          <div
+            id="btnMask"
+            class="absolute top-0 bottom-0 left-0 right-0"
+          ></div>
+          <button
+            class="
+              bg-gradient-to-br
+              from-teal-500
+              to-sky-500
+              py-2
+              px-4
+              rounded-full
+              text-white
+              hover:from-teal-600 hover:to-sky-600
+              disabled:from-slate-200
+              disabled:to-slate-200
+              disabled:text-slate-400
+              transition
+            "
+            id="submit"
+            type="submit"
+            data-cy="add_log_btn"
+            disabled
+          >
+            Add Log
+          </button>
+        </div>
       </section>
     </form>
+
+    <audio id="errorMp3">
+      <source
+        src="https://ryancluff.com/cs4690/sounds/r2d2-scream.mp3"
+        type="audio/mpeg"
+      />
+      Your browser does not support the audio element.
+    </audio>
+    <audio id="successMp3">
+      <source
+        src="https://ryancluff.com/cs4690/sounds/r2d2-success.mp3"
+        type="audio/mpeg"
+      />
+      Your browser does not support the audio element.
+    </audio>
+
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="jql.js"></script>

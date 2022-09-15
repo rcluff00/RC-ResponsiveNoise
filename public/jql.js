@@ -58,7 +58,11 @@ class ElementCollection extends Array {
         elem.setAttribute(attr, val)
       })
     } else {
-      return this.getAttribute(attr)
+      if (attr == 'disabled') {
+        if (this[0].disabled) return true
+        else return false
+      }
+      return this[0].getAttribute(attr)
     }
   }
 

@@ -1,3 +1,6 @@
+const text2Speech = window.speechSynthesis()
+text2Speech.speak('boobies')
+
 let $uvuIdInputDiv = $('.uvu-id')
 let $uvuIdInput = $('#uvuId')
 let $courseInput = $('#course')
@@ -13,6 +16,10 @@ $('#logForm').on('submit', function (event) {
 })
 
 $('#submit').on('click', postLog)
+
+$('#btnMask').on('click', function () {
+  playSound($('#errorMp3')[0])
+})
 
 $uvuIdInput.on('input', checkUvuId)
 
@@ -141,6 +148,7 @@ function showLogs(json) {
   bindEventToLogs()
 
   $('button').attr('disabled', 'false')
+  $('#btnMask').css('display', 'none')
 }
 
 // create new log
@@ -161,15 +169,20 @@ function postLog(event) {
       text: $('#logBodyInput').val(),
       id: createUUID(),
     })
-    .then(function (response) {
-      console.log(response)
-    })
     .catch(function (error) {
       console.log(error)
     })
 
   refreshLogs()
   $('#logBodyInput').val('')
+
+  $('#successMp3')[0].play()
+}
+
+function playSound(audio) {
+  if ($('button#submit').attr('disabled')) {
+    audio.play()
+  }
 }
 
 // creat unique id
