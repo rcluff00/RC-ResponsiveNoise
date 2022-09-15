@@ -86,13 +86,28 @@
           for="logBodyInput"
           >New Log
         </label>
-        <textarea
-          class="w-full bg-slate-200 p-2 px-4 rounded-[1.25rem] mb-4"
-          id="logBodyInput"
-          style="height: 75px"
-          aria-label="add log textarea"
-          data-cy="log_textarea"
-        ></textarea>
+        <div class="relative">
+          <textarea
+            class="w-full bg-slate-200 p-2 px-4 pr-9 rounded-[1.25rem] mb-4"
+            id="logBodyInput"
+            style="height: 75px"
+            aria-label="add log textarea"
+            data-cy="log_textarea"
+          ></textarea>
+          <div
+            id="vtt"
+            class="
+              absolute
+              top-2
+              right-2
+              rounded-full
+              bg-teal-500
+              hover:bg-teal-600 hover:cursor-pointer
+            "
+          >
+            Dictate speech
+          </div>
+        </div>
 
         <div class="inline-block relative">
           <div

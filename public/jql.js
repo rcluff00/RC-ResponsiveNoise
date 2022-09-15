@@ -40,6 +40,16 @@ class ElementCollection extends Array {
     })
   }
 
+  toggleClass(className) {
+    this.forEach((elem) => {
+      elem.classList.toggle(className)
+    })
+  }
+
+  hasClass(className) {
+    return this[0].classList.contains(className)
+  }
+
   attr(attr, val) {
     if (typeof val === 'string' || val instanceof String) {
       if (attr == 'disabled') {

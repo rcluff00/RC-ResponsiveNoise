@@ -1,6 +1,30 @@
-const synth = window.speechSynthesis
+const text2Speech = window.speechSynthesis
+const voice2Text = new webkitSpeechRecognition()
+
+voice2Text.onstart = function () {
+  $('#vtt').addClass('bg-red-500 hover:bg-red-600')
+}
+
+voice2Text.onresult = (event) => {
+  alert(event.results[0][0].transcript)
+}
+
+voice2Text.onend = function () {
+  $('#vtt').removeClass('bg-red-500')
+  $('#vtt').removeClass('hover:bg-red-600')
+}
+
+$('#vtt').on('click', function () {
+  if ($(this).hasClass('recording')) {
+    voice2Text.stop()
+  } else {
+    voice2Text.start()
+  }
+  $('#vtt').toggleClass('recording')
+})
 
 $('h3').on('click', function () {
+  text2Speech.cancel()
   let speechStr = ''
   $('#logsUl li').each(function ($this) {
     speechStr += 'Time: '
@@ -8,14 +32,14 @@ $('h3').on('click', function () {
 
     let logBody = $this.children('pre').text()
     if (logBody === '') {
-      speechStr += '<Log empty> \n'
+      speechStr += '(Log empty) \n'
     } else {
       speechStr += 'Log: '
       speechStr += logBody + '\n'
     }
   })
   const utterThis = new SpeechSynthesisUtterance(speechStr)
-  synth.speak(utterThis)
+  text2Speech.speak(utterThis)
 })
 
 let $uvuIdInputDiv = $('.uvu-id')
@@ -87,7 +111,6 @@ async function refreshCourseSelect() {
     .get(url)
     .then(function (response) {
       // handle success
-      console.log(response)
       let json = response.data
       for (let i = 0; i < json.length; i++) {
         courseSelect.append(
