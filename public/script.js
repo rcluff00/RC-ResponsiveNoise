@@ -146,7 +146,7 @@ async function refreshCourseSelect() {
 async function refreshLogs() {
   let courseId = $('#course').val()
   let uvuId = $('#uvuId').val()
-  let url = 'http://localhost:3000/api/v1/courses'
+  let url = `https://localhost:3000/api/v1/logs?courseId=${courseId}&uvuId=${uvuId}`
 
   // fetch log info
   axios
@@ -220,7 +220,7 @@ function postLog(event) {
   let amPm = d.getHours() < 12 ? 'AM' : 'PM'
   let time = `${d.getHours()}:${d.getMinutes()}:${d.getSeconds()} ${amPm}`
 
-  let url = 'http://localhost:3000/api/v1/courses'
+  let url = `https://localhost:3000/api/v1/logs?courseId=${courseId}&uvuId=${uvuId}`
 
   axios
     .post(url, {

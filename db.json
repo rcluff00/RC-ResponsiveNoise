@@ -55,6 +55,20 @@
     {
       "id": "cs4690",
       "display": "CS 4690"
+    },
+    {
+      "courseId": "cs4660",
+      "uvuId": "10111111",
+      "date": "12/5/2022, 17:55:15 PM",
+      "text": "asdf",
+      "id": "1aab5f7"
+    },
+    {
+      "courseId": "cs4660",
+      "uvuId": "10111111",
+      "date": "12/5/2022, 17:55:40 PM",
+      "text": "does this guy still work\n",
+      "id": "fbb7f0d"
     }
   ]
 }
